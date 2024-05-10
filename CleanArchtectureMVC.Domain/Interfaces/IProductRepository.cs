@@ -6,7 +6,9 @@ namespace CleanArchtectureMVC.Domain.Interface
     {
         Task<IEnumerable<Product>> GetAllAsync();
 
-        Task<Product> GetByIdAsync(int? id);
+        Task<Product?> GetByIdAsync(int id);
+
+        Task<IEnumerable<Product>> GetProductsByCategoryAsync(int idCategory);
 
         Task<Product> CreateAsync(Product product);
 
