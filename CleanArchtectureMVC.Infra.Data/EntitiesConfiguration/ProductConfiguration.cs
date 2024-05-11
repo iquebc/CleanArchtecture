@@ -12,6 +12,8 @@ namespace CleanArchtectureMVC.Infra.Data.EntitiesConfiguration{
             builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Price).HasPrecision(10,2);
             builder.HasOne(e=>e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId);
+
+            builder.HasData(new Product(1, "Test Product", "Test Description Product", 10, 100, "", 1));
         }
     }
 }

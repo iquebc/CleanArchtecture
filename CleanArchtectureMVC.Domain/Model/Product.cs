@@ -73,33 +73,47 @@ namespace CleanArchtectureMVC.Domain.Model
             }
         }
 
-        public int CategoryId { get; set; }
+        private int categoryId;
+        public int CategoryId
+        {
+            get
+            {
+                return categoryId;
+            }
+            private set
+            {
+                DomainExceptionValidation.When(value <= 0, "Invalid Category");
+                categoryId = value;
+            }
+        }
+
         public Category Category { get; set; }
 
         #endregion
 
         #region :: Constructors
 
-        public Product(int id, string name, string description, decimal price, int stock, string image) : base(id)
+        public Product(int id, string name, string description, decimal price, int stock, string image, int categoryId) : base(id)
         {
             Name = name;
             Description = description;
             Price = price;
             Stock = stock;
             Image = image;
+            CategoryId = categoryId;
         }
 
         #endregion
 
         #region :: Methods
-        public static Product NewProduct(string name, string description, decimal price, int stock, string image)
+        public static Product NewProduct(string name, string description, decimal price, int stock, string image, int categoryId)
         {
-            return new Product(0, name, description, price, stock, image);
+            return new Product(0, name, description, price, stock, image, categoryId);
         }
 
-        public Product UpdateProduct(string name, string description, decimal price, int stock, string image)
+        public Product UpdateProduct(string name, string description, decimal price, int stock, string image, int categoryId)
         {
-            return new Product(Id, name, description, price, stock, image);
+            return new Product(Id, name, description, price, stock, image, categoryId);
         }
 
         #endregion

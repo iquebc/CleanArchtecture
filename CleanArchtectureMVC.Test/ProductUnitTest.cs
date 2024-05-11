@@ -8,7 +8,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldCreateNewProduct()
     {
-        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, "image");
+        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, "image", 1);
         Assert.Equal(0, product.Id);
         Assert.Equal("New Product", product.Name);
         Assert.Equal("Test new Product", product.Description);
@@ -20,7 +20,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldCreateCategoryWithIdHigherThenZero()
     {
-        Product product = new Product(10, "New Product", "Test new Product", 10, 100, "image");
+        Product product = new Product(10, "New Product", "Test new Product", 10, 100, "image", 1);
         Assert.Equal(10, product.Id);
         Assert.Equal("New Product", product.Name);
         Assert.Equal("Test new Product", product.Description);
@@ -32,7 +32,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenNameIsEmpty()
     {
-        Action action = () => Product.NewProduct("", "Test new Product", 10, 100, "image");
+        Action action = () => Product.NewProduct("", "Test new Product", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Name Is Required", exception.Message);
     }
@@ -40,7 +40,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenNameWithWhiteSpace()
     {
-        Action action = () => Product.NewProduct("        ", "Test new Product", 10, 100, "image");
+        Action action = () => Product.NewProduct("        ", "Test new Product", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Name Is Required", exception.Message);
     }
@@ -48,7 +48,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenNameIsNull()
     {
-        Action action = () => Product.NewProduct(null, "Test new Product", 10, 100, "image");
+        Action action = () => Product.NewProduct(null, "Test new Product", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Name Is Required", exception.Message);
     }
@@ -57,7 +57,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenNameIsTooSmall()
     {
-        Action action = () => Product.NewProduct("as", "Test new Product", 10, 100, "image");
+        Action action = () => Product.NewProduct("as", "Test new Product", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Name too small, minimum 3 characters", exception.Message);
     }
@@ -65,7 +65,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenDescriptionIsEmpty()
     {
-        Action action = () => Product.NewProduct("New Product", "", 10, 100, "image");
+        Action action = () => Product.NewProduct("New Product", "", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Description Is Required", exception.Message);
     }
@@ -73,7 +73,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenDescriptionWithWhiteSpace()
     {
-        Action action = () => Product.NewProduct("New Product", "        ", 10, 100, "image");
+        Action action = () => Product.NewProduct("New Product", "        ", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Description Is Required", exception.Message);
     }
@@ -81,7 +81,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenDescriptionIsNull()
     {
-        Action action = () => Product.NewProduct("New Product", null, 10, 100, "image");
+        Action action = () => Product.NewProduct("New Product", null, 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Description Is Required", exception.Message);
     }
@@ -89,7 +89,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenDescriptionIsTooSmall()
     {
-        Action action = () => Product.NewProduct("New Product", "Test", 10, 100, "image");
+        Action action = () => Product.NewProduct("New Product", "Test", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Description too small, minimum 5 characters", exception.Message);
     }
@@ -97,7 +97,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenIdIsNegative()
     {
-        Action action = () => new Product(-1, "New Product", "Test new Product", 10, 100, "image");
+        Action action = () => new Product(-1, "New Product", "Test new Product", 10, 100, "image", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Invalid Id Value", exception.Message);
     }
@@ -105,7 +105,7 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenPriceIsNegative()
     {
-        Action action = () => Product.NewProduct("New Product", "Test new Product", -10, 100, "image"); ;
+        Action action = () => Product.NewProduct("New Product", "Test new Product", -10, 100, "image", 1); ;
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Invalid price value", exception.Message);
     }
@@ -113,29 +113,45 @@ public class ProductUnitTest
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenStockIsNegative()
     {
-        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, -1, "image"); ;
+        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, -1, "image", 1); ;
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Invalid stock value", exception.Message);
     }
 
     [Fact]
+    public void ShouldThrowDomainExceptionValidationWhenCategoryIsNegative()
+    {
+        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, 10, "image", -1); ;
+        DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
+        Assert.Equal("Invalid Category", exception.Message);
+    }
+
+    [Fact]
+    public void ShouldThrowDomainExceptionValidationWhenCategoryIsZero()
+    {
+        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, 10, "image", 0); ;
+        DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
+        Assert.Equal("Invalid Category", exception.Message);
+    }
+
+    [Fact]
     public void ShouldCreateNewProductWithNullImage()
     {
-        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, null);
+        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, null, 1);
         Assert.Equal(String.Empty, product.Image);
     }
 
     [Fact]
     public void ShouldCreateNewProductWithEmptyImage()
     {
-        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, "");
+        Product product = Product.NewProduct("New Product", "Test new Product", 10, 100, "", 1);
         Assert.Equal(String.Empty, product.Image);
     }
 
     [Fact]
     public void ShouldThrowDomainExceptionValidationWhenNameIsTooBig()
     {
-        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, 100, "aihsiudhaiushdiahsduiahsdiuashdiuahsdiaushdaiushduiashduiashdiuashuidhsauidhasiuhdasiudhauishduiasdhauishdauishdiuashduiashdauishdiuashdiuashduiahsdiuashuidhasuidhasuidhausidhaisudhasiudhasuidhasuidhauishdaisudhaiusdhaisudhaiushdasuidhasiuhdaiushdisudhaisudhaisudhasiudhasiudhasiudhasiudh");
+        Action action = () => Product.NewProduct("New Product", "Test new Product", 10, 100, "aihsiudhaiushdiahsduiahsdiuashdiuahsdiaushdaiushduiashduiashdiuashuidhsauidhasiuhdasiudhauishduiasdhauishdauishdiuashduiashdauishdiuashdiuashduiahsdiuashuidhasuidhasuidhausidhaisudhasiudhasuidhasuidhauishdaisudhaiusdhaisudhaiushdasuidhasiuhdaiushdisudhaisudhaisudhasiudhasiudhasiudhasiudh", 1);
         DomainExceptionValidation exception = Assert.Throws<DomainExceptionValidation>(action);
         Assert.Equal("Invalid Image Name, maximum 250 characters", exception.Message);
     }
@@ -143,8 +159,8 @@ public class ProductUnitTest
     [Fact]
     public void ShouldUpdateProductWithNewValidName()
     {
-        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image");
-        Product UpdatedArrange = Arrange.UpdateProduct("Updated Product", Arrange.Description, Arrange.Price, Arrange.Stock, Arrange.Image);
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct("Updated Product", Arrange.Description, Arrange.Price, Arrange.Stock, Arrange.Image, Arrange.CategoryId);
         Assert.Equal(10, UpdatedArrange.Id);
         Assert.Equal("Updated Product", UpdatedArrange.Name);
     }
@@ -152,8 +168,8 @@ public class ProductUnitTest
     [Fact]
     public void ShouldUpdateProductWithNewValidDescription()
     {
-        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image");
-        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, "Updated Description", Arrange.Price, Arrange.Stock, Arrange.Image);
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, "Updated Description", Arrange.Price, Arrange.Stock, Arrange.Image, Arrange.CategoryId);
         Assert.Equal(10, UpdatedArrange.Id);
         Assert.Equal("Updated Description", UpdatedArrange.Description);
     }
@@ -161,8 +177,8 @@ public class ProductUnitTest
     [Fact]
     public void ShouldUpdateProductWithNewValidPrice()
     {
-        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image");
-        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, 20, Arrange.Stock, Arrange.Image);
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, 20, Arrange.Stock, Arrange.Image, Arrange.CategoryId);
         Assert.Equal(10, UpdatedArrange.Id);
         Assert.Equal(20, UpdatedArrange.Price);
     }
@@ -170,8 +186,8 @@ public class ProductUnitTest
     [Fact]
     public void ShouldUpdateProductWithNewValidStock()
     {
-        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image");
-        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, Arrange.Price, 10, Arrange.Image);
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, Arrange.Price, 10, Arrange.Image, Arrange.CategoryId);
         Assert.Equal(10, UpdatedArrange.Id);
         Assert.Equal(10, UpdatedArrange.Stock);
     }
@@ -179,9 +195,18 @@ public class ProductUnitTest
     [Fact]
     public void ShouldUpdateProductWithNewValidImage()
     {
-        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image");
-        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, Arrange.Price, Arrange.Stock, "Updated Image");
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, Arrange.Price, Arrange.Stock, "Updated Image", Arrange.CategoryId);
         Assert.Equal(10, UpdatedArrange.Id);
         Assert.Equal("Updated Image", UpdatedArrange.Image);
+    }
+
+    [Fact]
+    public void ShouldUpdateProductWithNewValidCategory()
+    {
+        Product Arrange = new Product(10, "Existent Product", "Existent Description", 10, 100, "image", 1);
+        Product UpdatedArrange = Arrange.UpdateProduct(Arrange.Name, Arrange.Description, Arrange.Price, Arrange.Stock, Arrange.Image, 2);
+        Assert.Equal(10, UpdatedArrange.Id);
+        Assert.Equal(2, UpdatedArrange.CategoryId);
     }
 }
