@@ -5,7 +5,7 @@ using CleanArchtectureMVC.Domain.Model;
 
 namespace CleanArchtectureMVC.Application.DTOs
 {
-    public class ProductDTO()
+    public class ProductDTO
     {
         public int Id { get; set; }
 
