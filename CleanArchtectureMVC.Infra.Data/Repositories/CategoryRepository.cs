@@ -29,12 +29,13 @@ namespace CleanArchtectureMVC.Infra.Data.Repositories
 
         public async Task<Category?> GetByIdAsync(int id)
         {
-            return await _categoryContext.Categories.FindAsync(id);
+            Category? category = await _categoryContext.Categories.FindAsync(id);
+            return category;
         }
 
         public async Task<Category> RemoveAsync(Category category)
         {
-             _categoryContext.Remove(category);
+            _categoryContext.Remove(category);
             await _categoryContext.SaveChangesAsync();
             return category;
         }

@@ -1,0 +1,29 @@
+@model CleanArchtectureMVC.Application.DTOs.CategoryDTO
+
+@{
+    ViewData["TItle"] = "Delete Category";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Are you sure do you want to delete this item?</h4>
+
+<hr />
+<div class="form-horizontal">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<form asp-action="Delete">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info">Back to List</a>
+        </div>
+    </div>
+</form>

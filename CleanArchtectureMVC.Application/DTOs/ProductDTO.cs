@@ -37,10 +37,12 @@ namespace CleanArchtectureMVC.Application.DTOs
         [DisplayName("Product Image")]
         public string Image { get; set; }
         
-        public Category Category { get; set; }
-
         [DisplayName("Categories")]
+        [Required(ErrorMessage = "The Category is Required")]
         public int CategoryId { get; set; }
+        
+        public Category? Category { get; set; }
+
     }
 
 }

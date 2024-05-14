@@ -1,0 +1,66 @@
+@model CleanArchtectureMVC.Application.DTOs.ProductDTO
+
+@{
+    ViewData["TItle"] = "Details Product";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Id)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Price)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Stock)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Stock)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using CleanArchtectureMVC.Domain.Interface;
 using CleanArchtectureMVC.Domain.Model;
 using CleanArchtectureMVC.Infra.Data.Context;
@@ -29,7 +30,8 @@ namespace CleanArchtectureMVC.Infra.Data.Repositories
 
         public async Task<Product?> GetByIdAsync(int id)
         {
-            return await _productContext.Products.FindAsync(id);
+            Product? product = await _productContext.Products.Where(p => p.Id == id).Include(c => c.Category).FirstOrDefaultAsync();
+            return product;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int idCategory)

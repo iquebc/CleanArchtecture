@@ -20,9 +20,9 @@ namespace CleanArchtectureMVC.Application.Products.Handlers
 
             if (product == null) throw new ApplicationException("Product could not be found");
 
-            Product updatedProduct = product.UpdateProduct(request.Name, request.Description, request.Price, request.Stock, request.Image, request.CategoryId);
+            product.UpdateProduct(request.Name, request.Description, request.Price, request.Stock, request.Image, request.CategoryId);
 
-            return await _productRepository.UpdateAsync(updatedProduct);
+            return await _productRepository.UpdateAsync(product);
         }
     }
 }

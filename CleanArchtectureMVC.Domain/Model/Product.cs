@@ -111,9 +111,18 @@ namespace CleanArchtectureMVC.Domain.Model
             return new Product(0, name, description, price, stock, image, categoryId);
         }
 
-        public Product UpdateProduct(string name, string description, decimal price, int stock, string image, int categoryId)
+        //public Product UpdateProduct(string name, string description, decimal price, int stock, string image, int categoryId)
+        //{
+        //    return new Product(Id, name, description, price, stock, image, categoryId);
+        //}
+
+        public void UpdateProduct(string name, string description, decimal price, int stock, string image, int categoryId)
         {
-            return new Product(Id, name, description, price, stock, image, categoryId);
+            Name = name;
+            Description = description; Price = price;
+            Stock = stock;
+            Image = image;
+            CategoryId = categoryId;
         }
 
         #endregion
